@@ -1,1 +1,1 @@
-# CodeU-Excercises
+# CodeU-Exercises
