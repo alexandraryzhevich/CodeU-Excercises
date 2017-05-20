@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 public class Assignment1Q1 {
 
@@ -19,6 +18,17 @@ public class Assignment1Q1 {
         return true;
     }
 
+    private static Map<Character, Integer> fillCounter(String str) {
+        str = str.toLowerCase();
+        // create hash map to calculate the frequency of each character
+        Map<Character, Integer> counter = new HashMap<>();
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            counter.put(c, counter.getOrDefault(c, 0) + 1);
+        }
+        return counter;
+    }
+
     /**
      * More general solution that works for any kind of characters.
      */
@@ -30,18 +40,7 @@ public class Assignment1Q1 {
             return true;                        // empty strings are permutation of each other
         }
 
-        Function<String, Map<Character, Integer>> fillCounter = (String str) -> {
-            str = str.toLowerCase();
-            // create hash map to calculate the frequency of each character
-            Map<Character, Integer> counter = new HashMap<>(str.length() * 2);
-            for (int i = 0; i < str.length(); i++) {
-                char c = str.charAt(i);
-                counter.put(c, counter.getOrDefault(c, 0) + 1);
-            }
-            return counter;
-        };
-
-        return fillCounter.apply(str1).equals(fillCounter.apply(str2));
+        return fillCounter(str1).equals(fillCounter(str2));
     }
 
     /**
@@ -87,17 +86,21 @@ public class Assignment1Q1 {
         System.out.println(isEnglishAlphabetPermutation(null, null));            // false
         System.out.println(isEnglishAlphabetPermutation(null, ""));              // false
         System.out.println(isEnglishAlphabetPermutation("", ""));                // true
+        System.out.println(isEnglishAlphabetPermutation("", "f"));               // false
         System.out.println(isEnglishAlphabetPermutation("a", "a"));              // true
         System.out.println(isEnglishAlphabetPermutation("a", "ab"));             // false
         System.out.println(isEnglishAlphabetPermutation("a", "A"));              // true
         System.out.println(isEnglishAlphabetPermutation("abc", "ACB"));          // true
         System.out.println(isEnglishAlphabetPermutation("abc", "ABB"));          // false
         System.out.println(isEnglishAlphabetPermutation("abc", "abd"));          // false
+        System.out.println(isEnglishAlphabetPermutation("xyz", "ZxY"));          // true
+        System.out.println(isEnglishAlphabetPermutation("xyz", "ZxW"));          // false
         System.out.println();
 
         System.out.println(isPermutation(null, null));            // false
         System.out.println(isPermutation(null, ""));              // false
         System.out.println(isPermutation("", ""));                // true
+        System.out.println(isPermutation("", "f"));               // false
         System.out.println(isPermutation("a", "a"));              // true
         System.out.println(isPermutation("a", "ab"));             // false
         System.out.println(isPermutation("a", "A"));              // true
@@ -106,5 +109,8 @@ public class Assignment1Q1 {
         System.out.println(isPermutation("abc", "abd"));          // false
         System.out.println(isPermutation("ab.", "ab/"));          // false
         System.out.println(isPermutation("...55,,", ".5.5,.,"));  // true
+        System.out.println(isPermutation("xyz", "ZxY"));          // true
+        System.out.println(isPermutation("xyz", "ZxW"));          // false
+        System.out.println(isPermutation("@z", "az"));            // false
     }
 }
