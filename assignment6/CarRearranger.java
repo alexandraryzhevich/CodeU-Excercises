@@ -11,44 +11,6 @@ public class CarRearranger {
     private final int EMPTY = 0;
 
     public CarRearranger(Integer[] sourceOrder, Integer[] destOrder) {
-        validateParameters(sourceOrder, destOrder);
-        init(sourceOrder, destOrder);
-    }
-
-    /**
-     * Validates input data.
-     */
-    private void validateParameters(Integer[] sourceOrder, Integer[] destOrder) {
-        if (sourceOrder == null || destOrder == null) {
-            throw new IllegalArgumentException("Arguments cannot be null.");
-        }
-        if (sourceOrder.length != destOrder.length) {
-            throw new IllegalArgumentException("Source and destination orders have not equal length.");
-        }
-        if (!validateOrder(sourceOrder) || !validateOrder(destOrder)) {
-            throw new IllegalArgumentException("Source or destination order is invalid.");
-        }
-    }
-
-    /**
-     * Checks if array contains numbers from 0 to N-1 and only once.
-     */
-    private boolean validateOrder(Integer[] order) {
-        boolean[] checkExistence = new boolean[order.length];
-        for (int item : order) {
-            if (item < 0 || item >= order.length || checkExistence[item]) {
-                return false;
-            }
-            checkExistence[item] = true;
-        }
-        return true;
-    }
-
-    /**
-     * Initializes data to work with
-     * so that algorithm will not change input data.
-     */
-    private void init(Integer[] sourceOrder, Integer destOrder[]) {
         this.destOrder = new int[destOrder.length];
         this.placesByCarIndex = new int[destOrder.length];
         this.currentOrder = new int[destOrder.length];
